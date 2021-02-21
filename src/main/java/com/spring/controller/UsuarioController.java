@@ -30,4 +30,9 @@ public class UsuarioController {
 		return "ReporteDocumentos";
 	}
 	
+	@GetMapping("/mantenimientoTrabajador")
+	public String MantenimientoTrabajador() {
+		return "MantenimientoTrabajador";
+	}
+	
 }

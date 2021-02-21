@@ -39,8 +39,12 @@ public class webSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-			http.authorizeRequests().antMatchers("/auth/**","/public/**","/css/**","/js/**").permitAll()
+			http.authorizeRequests().antMatchers("/auth/**","skyscrapers/home","/images/**","/fonts/**","/vendor/**","/public/**","/css/**","/js/**").permitAll()
 			.antMatchers("/skyscrapers/consultarDocumentos").hasAnyAuthority("CLI_GESTOR","CLI_FIRMANTE")
+			.antMatchers("/skyscrapers/firmarDocumentos").hasAnyAuthority("CLI_FIRMANTE")
+			.antMatchers("/skyscrapers/reporteEstadisticos").hasAnyAuthority("CLI_FIRMANTE")
+			.antMatchers("/skyscrapers/subirDocumento").hasAnyAuthority("CLI_GESTOR")
+			.antMatchers("/skyscrapers/mantenimientoTrabajador").hasAnyAuthority("CLI_GESTOR")
 			.anyRequest().authenticated()
 			.and()
 				.formLogin().loginPage("/auth/login").defaultSuccessUrl("/skyscrapers/home",true).failureUrl("/auth/login?error=true")

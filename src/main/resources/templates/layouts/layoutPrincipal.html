@@ -30,7 +30,7 @@
 		          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 		            <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" href="#">Empresa</a></li>
 		            <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" href="#">Bolsa de Firmas</a></li>
-		            <li sec:authorize="hasAuthority('CLI_GESTOR')"><a class="dropdown-item" href="#">Trabajador</a></li>
+		            <li sec:authorize="hasAuthority('CLI_GESTOR')"><a class="dropdown-item" th:href="@{/skyscrapers/mantenimientoTrabajador}">Trabajador</a></li>
 		          </ul>
 		        </li>
 		        <li class="nav-item dropdown" sec:authorize="hasAnyAuthority('CLI_FIRMANTE','CLI_GESTOR')">
@@ -42,7 +42,7 @@
 		          </ul>
 		        </li>
 		        <li class="nav-item" sec:authorize="hasAuthority('CLI_GESTOR')">
-		          <a class="nav-link active" aria-current="page" href="#">Subir Documento</a>
+		          <a class="nav-link active" aria-current="page" th:href="@{/skyscrapers/subirDocumento}">Subir Documento</a>
 		        </li>
 		        <li class="nav-item" sec:authorize="hasAuthority('CLI_FIRMANTE')">
 		          <a class="nav-link active" aria-current="page" href="#">Registrar Certificado</a>
