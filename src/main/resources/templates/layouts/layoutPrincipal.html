@@ -21,16 +21,17 @@
 		    <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
 		      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 		        <li class="nav-item">
-		          <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+		          <a class="nav-link active" aria-current="page" th:href="@{/skyscrapers/home}">Inicio</a>
 		        </li>
 		        <li class="nav-item dropdown" sec:authorize="hasAnyAuthority('CLI_GESTOR','ADMIN')">
 		          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 		            Mantenimiento
 		          </a>
 		          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-		            <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" href="#">Empresa</a></li>
-		            <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" href="#">Bolsa de Firmas</a></li>
-		            <li sec:authorize="hasAuthority('CLI_GESTOR')"><a class="dropdown-item" th:href="@{/skyscrapers/mantenimientoTrabajador}">Trabajador</a></li>
+		            <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/skyscrapers/listar}" >Empresa</a></li>
+		            <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/auth/registro}" >Registrar Usuario</a></li>
+		            <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/skyscrapers/listarPlanes}">Bolsa de Firmas</a></li>
+		            <li sec:authorize="hasAuthority('CLI_GESTOR')"><a class="dropdown-item" th:href="@{/skyscrapers/listarTrabajadores}">Trabajador</a></li>
 		          </ul>
 		        </li>
 		        <li class="nav-item dropdown" sec:authorize="hasAnyAuthority('CLI_FIRMANTE','CLI_GESTOR')">
@@ -52,7 +53,7 @@
 		        </li>
 		        
 		        <li class="nav-item" sec:authorize="hasAuthority('CLI_FIRMANTE')">
-		          <a class="nav-link active" aria-current="page" th:href="@{/skyscrapers/reporteEstadisticos}">Reporte Estadístico</a>
+		          <a class="nav-link active" aria-current="page" th:href="@{/skyscrapers/documentos/export/excel}">Generar Estadístico</a>
 		        </li>
 		      </ul>
 		      <div class="d-flex">

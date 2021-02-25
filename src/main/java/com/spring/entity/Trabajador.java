@@ -6,9 +6,10 @@ import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+
 @Entity
 @Table(name = "users")
-public class Usuario implements Serializable{
+public class Trabajador implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,8 +22,8 @@ public class Usuario implements Serializable{
 	private String  username;
 	private String password;
 	private boolean enabled = true;
-	
-	@OneToOne
+	 
+	@OneToOne(cascade = CascadeType.ALL)
 	private Empresa empresa; 	
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -31,13 +32,13 @@ public class Usuario implements Serializable{
 			joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "role_id")
 			)
-	private Set<Role> roles = new HashSet<>();
+	private Set<Role> roles	=  new  HashSet <> ();
 	
 	
-	public Usuario() {
+	public Trabajador() {
 	}
 	
-	public Usuario(Integer id, int dni, @NotEmpty String nombre, @NotEmpty String apellido, String username,
+	public Trabajador(Integer id, int dni, @NotEmpty String nombre, @NotEmpty String apellido, String username,
 			String password, boolean enabled, Empresa empresa, Set<Role> roles) {
 		this.id = id;
 		this.dni = dni;
@@ -104,11 +105,8 @@ public class Usuario implements Serializable{
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-
-	@Override
-	public String toString() {
-		return nombre + " " + apellido + " - " + roles;
-	}
+	
+	
 
 	private static final long serialVersionUID = 1L;
 }

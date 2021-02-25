@@ -32,5 +32,21 @@ public class Role {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public Role() {
+	}
+
+	public Role(int id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		
+		return name;
+	}
+	
+	
 
 }

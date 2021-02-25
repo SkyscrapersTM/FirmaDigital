@@ -1,12 +1,11 @@
 package com.spring.entity;
 
-import java.io.Serializable;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "empresa")
-public class Empresa implements Serializable{
+public class Empresa{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,15 +14,17 @@ public class Empresa implements Serializable{
 	private String razon_social;
 	private String giro_negocio;
 	private String direccion;
+	private String referencia;
 	private String correo;
 	private int telefono;
+	private int saldofirmas;
+
+	
 	
 	public Empresa() {
 		
 	}
-	
-	
-	
+
 	public Integer getIdempresa() {
 		return idempresa;
 	}
@@ -54,6 +55,15 @@ public class Empresa implements Serializable{
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
+	
+	public String getReferencia() {
+		return referencia;
+	}
+
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
+	}
+
 	public String getCorreo() {
 		return correo;
 	}
@@ -67,7 +77,12 @@ public class Empresa implements Serializable{
 		this.telefono = telefono;
 	}
 
+	public int getSaldofirmas() {
+		return saldofirmas;
+	}
 
+	public void setSaldofirmas(int saldofirmas) {
+		this.saldofirmas = saldofirmas;
+	}
 
-	private static final long serialVersionUID = 1L;
 }
