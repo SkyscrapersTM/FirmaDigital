@@ -37,10 +37,10 @@ public class UsuarioController {
 		return "ConsultarDocumentos";
 	}
 	
-	@GetMapping("/firmarDocumentos")
+	/**@GetMapping("/firmarDocumentos")
 	public String FirmarDocumento() {
 		
 		return "FirmarDocumentos";
-	}
+	}**/
 		
 }

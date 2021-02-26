@@ -21,7 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table (name="documento")
-public class DocumentoII {
+public class Documento {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,10 +50,10 @@ public class DocumentoII {
 	private String estado;
 	
 	
-	public DocumentoII() {
+	public Documento() {
 	}
 
-	public DocumentoII(Integer iddocumento, Date fecha_registro, String nombre_original, byte[] link_original,
+	public Documento(Integer iddocumento, Date fecha_registro, String nombre_original, byte[] link_original,
 			String nombre_firmado, byte[] link_firmado, Set<Usuario> users, String estado) {
 		this.iddocumento = iddocumento;
 		this.fecha_registro = fecha_registro;

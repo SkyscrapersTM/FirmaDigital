@@ -4,23 +4,34 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.spring.entity.Empresa;
 import com.spring.model.dao.EmpresaDAO;
+import com.spring.model.dao.EmpresaDAOPag;
 import com.spring.model.service.EmpresaService;
 
 @Service
 public class EmpresaServiceImpl implements EmpresaService{
 	
 	@Autowired
-private EmpresaDAO empresaDAO;
+	private EmpresaDAOPag empresaDAODaoPag;
 
+	@Autowired
+	private EmpresaDAO empresaDAO;
+	
 	@Override
 	public List<Empresa> listar() {
 		return (List<Empresa>)empresaDAO.findAll();
 	}
 
+	@Override
+	public Page<Empresa> listAllEmpresas(Pageable pageable) {
+		return empresaDAODaoPag.findAll(pageable);
+	}
+	
 	@Override
 	public int save(Empresa e) {
 		int res=0;
@@ -46,8 +57,6 @@ private EmpresaDAO empresaDAO;
 	public void eliminar(Integer id) {
 		empresaDAO.deleteById(id);
 	}
-	
-
 
 
 }

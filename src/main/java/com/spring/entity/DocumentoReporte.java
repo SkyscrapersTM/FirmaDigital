@@ -20,9 +20,9 @@ public class DocumentoReporte {
 
 	private XSSFWorkbook workbook;
     private XSSFSheet sheet;
-    private List<DocumentoII> listDocuments;
+    private List<Documento> listDocuments;
     
-    public DocumentoReporte(List<DocumentoII> listDocuments) {
+    public DocumentoReporte(List<Documento> listDocuments) {
         this.listDocuments = listDocuments;
         workbook = new XSSFWorkbook();
     }
@@ -70,7 +70,7 @@ public class DocumentoReporte {
         style.setAlignment(HorizontalAlignment.CENTER);
         style.setFont(font);
                  
-        for (DocumentoII documets : listDocuments) {
+        for (Documento documets : listDocuments) {
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
              

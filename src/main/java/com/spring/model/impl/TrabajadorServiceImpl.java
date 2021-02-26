@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.spring.entity.Trabajador;
+import com.spring.model.dao.TrabajadorDAOPag;
 import com.spring.model.dao.TrabajadorRepository;
 import com.spring.model.service.TrabajadorService;
 
@@ -21,6 +24,8 @@ public class TrabajadorServiceImpl implements TrabajadorService{
 	@Autowired
 	private TrabajadorRepository trabajadorrepository;
 	
+	@Autowired
+	private TrabajadorDAOPag trabajadorDaoPag;
 	
 
 	@Override
@@ -28,6 +33,11 @@ public class TrabajadorServiceImpl implements TrabajadorService{
 		return (List<Trabajador>)trabajadorrepository.findAll();
 	}
 
+	@Override
+	public Page<Trabajador> listAllTrabajadores(Pageable pageable) {
+		return trabajadorDaoPag.findAll(pageable);
+	}
+	
 	@Override
 	public Optional<Trabajador> listarId(Integer id) {
 		// TODO Auto-generated method stub
@@ -55,5 +65,7 @@ public class TrabajadorServiceImpl implements TrabajadorService{
 		trabajadorrepository.deleteById(id);
 		
 	}
+
+	
 
 }

@@ -1,8 +1,10 @@
 package com.spring.controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,9 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.entity.PlanBolsaFirma;
 import com.spring.model.service.PlanBolsaFirmaService;
+import com.spring.utils.RenderizadorPaginas;
 
 @Controller
 @RequestMapping("/skyscrapers")
@@ -23,8 +27,14 @@ public class PlanBolsaFirmaController {
 	private PlanBolsaFirmaService planService;
 	
 	@GetMapping("/listarPlanes")
-	public String listarPlanes(Model model) {
-		List<PlanBolsaFirma> planes = planService.listarPlanes();
+	public String listarPlanes(@RequestParam(name="page", defaultValue = "0")int page, Model model) {
+		
+		Pageable planPageable = PageRequest.of(page, 5);
+		Page<PlanBolsaFirma> planes = planService.listAllPlans(planPageable);
+		RenderizadorPaginas<PlanBolsaFirma> renderizadorPaginas = new RenderizadorPaginas<PlanBolsaFirma>("/skyscrapers/listarPlanes", planes);
+		
+		//List<PlanBolsaFirma> planes = planService.listarPlanes();
+		model.addAttribute("page", renderizadorPaginas);
 		model.addAttribute("planes", planes);
 		return "listarPlanes";
 	}

@@ -49,16 +49,13 @@
 		          <a class="nav-link active" aria-current="page" href="#">Registrar Certificado</a>
 		        </li>
 		        <li class="nav-item" sec:authorize="hasAuthority('CLI_FIRMANTE')">
-		          <a class="nav-link active" aria-current="page" th:href="@{/skyscrapers/firmarDocumentos}">Firmar</a>
-		        </li>
-		        
-		        <li class="nav-item" sec:authorize="hasAuthority('CLI_FIRMANTE')">
-		          <a class="nav-link active" aria-current="page" th:href="@{/skyscrapers/documentos/export/excel}">Generar Estadístico</a>
+		          <a class="nav-link active" aria-current="page" th:href="@{/skyscrapers/documentos/listarDocumentos}">Firmar</a>
 		        </li>
 		      </ul>
 		      <div class="d-flex">
 		      	<a class="nav-link disabled fs-5" href="#" tabindex="-1" aria-disabled="true" sec:authorize="isAuthenticated()">Bienvenid@: <span sec:authentication="name">Username</span></a>
               	<a class="nav-link disabled fs-5" href="#" tabindex="-1" aria-disabled="true">Saldo: xxxx firmas</a>
+              	<div sec:authorize="hasAuthority('CLI_FIRMANTE')"><a class="btn btn-outline-success fs-5 mx-2" aria-current="page" th:href="@{/skyscrapers/documentos/export/excel}">Reporte</a></div>
 		        <form th:action="@{/logout}" method="post">
 		        	<input class="btn btn-outline-danger fs-5" type="submit" value="Salir"/>
 		        </form>

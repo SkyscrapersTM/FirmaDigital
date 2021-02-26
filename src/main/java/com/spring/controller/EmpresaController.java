@@ -1,8 +1,10 @@
 package com.spring.controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,27 +12,28 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.entity.Empresa;
 import com.spring.model.service.EmpresaService;
+import com.spring.utils.RenderizadorPaginas;
 
 @Controller
 @RequestMapping("/skyscrapers")
 public class EmpresaController {
-
-	/*
-	@GetMapping("/listar")
-	public String listar() {
-		return "listar";
-	}
-*/
 	
 	@Autowired
 	private EmpresaService empresaService;
 	
 	@GetMapping("/listar")
-	public String listar(Model model) {
-		List<Empresa> empresas = empresaService.listar();
+	public String listar(@RequestParam(name="page", defaultValue = "0")int page, Model model) {
+		
+		Pageable empresaPageable = PageRequest.of(page, 5);
+		Page<Empresa> empresas = empresaService.listAllEmpresas(empresaPageable);
+		RenderizadorPaginas<Empresa> renderizadorPaginas = new RenderizadorPaginas<Empresa>("/skyscrapers/listar", empresas);
+		
+		//List<Empresa> empresas = empresaService.listar();
+		model.addAttribute("page", renderizadorPaginas);
 		model.addAttribute("empresas", empresas);
 		return "listar";
 	}
